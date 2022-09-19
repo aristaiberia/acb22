@@ -1,0 +1,30 @@
+---
+all:
+  children:
+    CLAB_DC1:
+      children:
+        CLAB_DC1_FABRIC:
+          children:
+            CLAB_DC1_SPINES:
+              hosts:
+                dc1-spine1:
+                  ansible_host: 192.168.123.11
+                dc1-spine2:
+                  ansible_host: 192.168.123.12
+            CLAB_DC1_L3_LEAVES:
+              hosts:
+                dc1-leaf1a:
+                  ansible_host: 192.168.123.21
+                dc1-leaf1b:
+                  ansible_host: 192.168.123.22
+                dc1-leaf2a:
+                  ansible_host: 192.168.123.23
+                dc1-leaf2b:
+                  ansible_host: 192.168.123.24
+
+        CLAB_DC1_NETWORK_SERVICES:
+          children:
+            CLAB_DC1_L3_LEAVES:
+        CLAB_DC1_CONNECTED_ENDPOINTS:
+          children:
+            CLAB_DC1_L3_LEAVES:

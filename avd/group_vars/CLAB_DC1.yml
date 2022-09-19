@@ -1,0 +1,63 @@
+---
+# Ansible connectivity definitions
+# eAPI connectivity via HTTPS is specified (as opposed to CLI via SSH)
+ansible_connection: ansible.netcommon.httpapi
+# Specifies that we are indeed using Arista EOS
+ansible_network_os: arista.eos.eos
+# This user/password must exist on the switches to enable Ansible access
+ansible_user: ansible
+ansible_password: ansible
+# User escalation (to enter enable mode)
+ansible_become: true
+ansible_become_method: enable
+# Use SSL (HTTPS)
+ansible_httpapi_use_ssl: true
+# Do not try to validate certs
+ansible_httpapi_validate_certs: false
+
+# Common AVD group variables
+fabric_name: CLAB_DC1
+
+# Define underlay and overlay routing protocol to be used
+underlay_routing_protocol: EBGP
+overlay_routing_protocol: EBGP
+
+# Local users
+local_users:
+  # Define a new user, which is called "ansible"
+  ansible:
+    privilege: 15
+    role: network-admin
+    # Password set to "ansible". Same string as the device generates when configuring a username.
+    sha512_password: $6$7u4j1rkb3VELgcZE$EJt2Qff8kd/TapRoci0XaIZsL4tFzgq1YZBLD9c6f/knXzvcYY0NcMKndZeCv0T268knGKhOEwZAxqKjlMm920
+    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDPn4k+tCWsrSzrgiIm2I0gXPNIWU6xwxIRfNR/WMXWu1TVFMNcfytFblq8+Y/UrYwo3sxMtuHu7IPZO3yd1vqOmPsa4uOJzXTV/5qjhiiuQrVk1yLzX0AXOGopABq03u3lbHkqA0CWXFyITw7jZKfvsA7163z5ijXtu+Yw/46rXZNbHiL81OgKJKGkgyvjhJh8eTMlhN8ANhuOD2Xa9apCgNlrelVqjQsSaMpb3kCYerv4HG9Fv/GINRBo2BMP0VhzF1jmHHtYpxoPu8HIqi14LjiObPD8FZhIfbWhwMOlfOU1QrwlT4RO1GN9pCFGLf3snXOpOnejxUOF0blcSjicbw2azYgiVe1db1uSAW21h6VZULCUK6Ai5NGfmiaosNqAIbITWqJK7+F/SfegUkmU04flRpueYSBGyQvcTQWtsLqbYRB3n7Ufn++lNA7OaEhm9l2OIhDZhtOyysSXFR/bfBOG+/1bJlkKqbayS85FQopG4mJcAXB8J1y/myXr9F8= ja@archer
+  cvpadmin:
+    privilege: 15
+    role: network-admin
+    # Password set to "arista123". Same string as the device generates when configuring a username.
+    sha512_password: $6$2bHwIrJcm32HV1Lw$GvWawZtW3ReBJmJarBAoiBA7XofdAbXuW5ob13LUX/0nBIdEPhhJdGkodo8qQyBngyMq9OgVTAmYULafLVlDB0
+  ja:
+    privilege: 15
+    role: network-admin
+    # Password set to "arista123". Same string as the device generates when configuring a username.
+    sha512_password: $6$2bHwIrJcm32HV1Lw$GvWawZtW3ReBJmJarBAoiBA7XofdAbXuW5ob13LUX/0nBIdEPhhJdGkodo8qQyBngyMq9OgVTAmYULafLVlDB0
+    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDPn4k+tCWsrSzrgiIm2I0gXPNIWU6xwxIRfNR/WMXWu1TVFMNcfytFblq8+Y/UrYwo3sxMtuHu7IPZO3yd1vqOmPsa4uOJzXTV/5qjhiiuQrVk1yLzX0AXOGopABq03u3lbHkqA0CWXFyITw7jZKfvsA7163z5ijXtu+Yw/46rXZNbHiL81OgKJKGkgyvjhJh8eTMlhN8ANhuOD2Xa9apCgNlrelVqjQsSaMpb3kCYerv4HG9Fv/GINRBo2BMP0VhzF1jmHHtYpxoPu8HIqi14LjiObPD8FZhIfbWhwMOlfOU1QrwlT4RO1GN9pCFGLf3snXOpOnejxUOF0blcSjicbw2azYgiVe1db1uSAW21h6VZULCUK6Ai5NGfmiaosNqAIbITWqJK7+F/SfegUkmU04flRpueYSBGyQvcTQWtsLqbYRB3n7Ufn++lNA7OaEhm9l2OIhDZhtOyysSXFR/bfBOG+/1bJlkKqbayS85FQopG4mJcAXB8J1y/myXr9F8= ja@archer
+  admin:
+    privilege: 15
+    role: network-admin
+    no_password: true
+
+# BGP peer groups passwords
+bgp_peer_groups:
+  # all passwords set to "arista"
+  evpn_overlay_peers:
+    password: Q4fqtbqcZ7oQuKfuWtNGRQ==
+  ipv4_underlay_peers:
+    password: 7x4B4rnJhZB438m9+BrBfQ==
+  mlag_ipv4_underlay_peer:
+    password: 4b21pAdCvWeAqpcKDFMdWw==
+
+# P2P interfaces MTU, includes VLANs 4093 and 4094 that are over peer-link
+# If you're running vEOS-lab or cEOS, you should use MTU of 1500 instead as shown in the following line
+# p2p_uplinks_mtu: 1500
+p2p_uplinks_mtu: 1500

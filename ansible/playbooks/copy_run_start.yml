@@ -1,0 +1,8 @@
+---
+- hosts: DC1_clab
+  gather_facts: no
+  tasks: 
+  - name: Save config
+    eos_command:
+      commands:
+        - copy run start

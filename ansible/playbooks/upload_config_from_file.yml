@@ -1,0 +1,7 @@
+---
+- hosts: DC1_clab
+  gather_facts: no
+  tasks: 
+  - name: Upload arbitrary file
+    eos_config:
+      src: alias.cfg
