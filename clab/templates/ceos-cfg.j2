@@ -1,0 +1,53 @@
+!
+switchport default mode routed
+!
+aaa root secret arista123
+aaa authorization exec default local
+aaa authorization commands all default local
+# cvpadmin password set to "arista123"
+username cvpadmin privilege 15 role network-admin secret sha512 $6$2bHwIrJcm32HV1Lw$GvWawZtW3ReBJmJarBAoiBA7XofdAbXuW5ob13LUX/0nBIdEPhhJdGkodo8qQyBngyMq9OgVTAmYULafLVlDB0
+# ja password set to "arista123"
+username ja privilege 15 role network-admin secret sha512 $6$EzY8.Mt2uHsoGYfw$yICYYt6MzPDO8Wv7q1w/rupm5SVI8bIeI7jbgIMaNeBOZFsReDnnYYch30ZTL3VgmD2qiQg5vqCRfHEPBAdku/
+username ja ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDPn4k+tCWsrSzrgiIm2I0gXPNIWU6xwxIRfNR/WMXWu1TVFMNcfytFblq8+Y/UrYwo3sxMtuHu7IPZO3yd1vqOmPsa4uOJzXTV/5qjhiiuQrVk1yLzX0AXOGopABq03u3lbHkqA0CWXFyITw7jZKfvsA7163z5ijXtu+Yw/46rXZNbHiL81OgKJKGkgyvjhJh8eTMlhN8ANhuOD2Xa9apCgNlrelVqjQsSaMpb3kCYerv4HG9Fv/GINRBo2BMP0VhzF1jmHHtYpxoPu8HIqi14LjiObPD8FZhIfbWhwMOlfOU1QrwlT4RO1GN9pCFGLf3snXOpOnejxUOF0blcSjicbw2azYgiVe1db1uSAW21h6VZULCUK6Ai5NGfmiaosNqAIbITWqJK7+F/SfegUkmU04flRpueYSBGyQvcTQWtsLqbYRB3n7Ufn++lNA7OaEhm9l2OIhDZhtOyysSXFR/bfBOG+/1bJlkKqbayS85FQopG4mJcAXB8J1y/myXr9F8= ja@archer
+# ansible password set to "ansible"
+username ansible privilege 15 role network-admin secret sha512 $6$.VGu6JeeURUqVBwa$/XbJgxBK6853tEGu5qwmu7qFO8MIwutHKKrIOjbhpKMkpnwDhdaN6yvK9xQ6hG1WTEpo8QL4FqyMkzpnnertP.
+username ansible ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDPn4k+tCWsrSzrgiIm2I0gXPNIWU6xwxIRfNR/WMXWu1TVFMNcfytFblq8+Y/UrYwo3sxMtuHu7IPZO3yd1vqOmPsa4uOJzXTV/5qjhiiuQrVk1yLzX0AXOGopABq03u3lbHkqA0CWXFyITw7jZKfvsA7163z5ijXtu+Yw/46rXZNbHiL81OgKJKGkgyvjhJh8eTMlhN8ANhuOD2Xa9apCgNlrelVqjQsSaMpb3kCYerv4HG9Fv/GINRBo2BMP0VhzF1jmHHtYpxoPu8HIqi14LjiObPD8FZhIfbWhwMOlfOU1QrwlT4RO1GN9pCFGLf3snXOpOnejxUOF0blcSjicbw2azYgiVe1db1uSAW21h6VZULCUK6Ai5NGfmiaosNqAIbITWqJK7+F/SfegUkmU04flRpueYSBGyQvcTQWtsLqbYRB3n7Ufn++lNA7OaEhm9l2OIhDZhtOyysSXFR/bfBOG+/1bJlkKqbayS85FQopG4mJcAXB8J1y/myXr9F8= ja@archer
+!
+vrf instance MGMT
+!
+service routing protocols model multi-agent
+!
+hostname {{ .ShortName }}
+!
+management api http-commands
+   protocol https
+   no shutdown
+   !
+   vrf MGMT
+      no shutdown
+!
+interface Management1
+   vrf MGMT
+   {{ if .MgmtIPv4Address }}   ip address {{ .MgmtIPv4Address }}/{{ .MgmtIPv4PrefixLength }}{{end}}
+   no lldp transmit
+   no lldp receive
+!
+logging on
+logging monitor 7
+logging level all 6
+logging synchronous
+terminal monitor
+!
+no ip routing vrf MGMT
+!
+ip route vrf MGMT 0.0.0.0/0 192.168.123.1
+!
+ip name-server vrf MGMT 8.8.8.8
+ntp local-interface vrf MGMT Management1
+ntp server vrf MGMT time.google.com
+clock timezone Europe/Madrid
+!
+end
+
+
+
