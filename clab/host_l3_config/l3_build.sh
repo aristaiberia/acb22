@@ -19,10 +19,10 @@ sudo route -n'
 
 
 echo "[INFO] Configuring clab-ceostopo2-host1"
-docker exec -it  clab-ceostopo2-host1 /bin/sh -c "$CMD1"
+docker exec -it  clab-ceostopo1-host1 /bin/sh -c "$CMD1"
 
 echo "[INFO] Configuring clab-ceostopo2-host2"
-docker exec -it  clab-ceostopo2-host2 /bin/sh -c "$CMD2"
+docker exec -it  clab-ceostopo1-host2 /bin/sh -c "$CMD2"
 
 
 echo "[INFO] Completed"

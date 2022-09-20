@@ -1,0 +1,7 @@
+hostname,model,serialnum,version
+dc1-spine1,cEOSLab,ABC0000001,4.28.2F-28369039.4282F (engineering build)
+dc1-spine2,cEOSLab,ABC0000002,4.28.2F-28369039.4282F (engineering build)
+dc1-leaf1a,cEOSLab,ABC0000011,4.28.2F-28369039.4282F (engineering build)
+dc1-leaf2a,cEOSLab,ABC0000013,4.28.2F-28369039.4282F (engineering build)
+dc1-leaf1b,cEOSLab,ABC0000012,4.28.2F-28369039.4282F (engineering build)
+dc1-leaf2b,cEOSLab,ABC0000014,4.28.2F-28369039.4282F (engineering build)

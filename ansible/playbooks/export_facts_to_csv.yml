@@ -1,0 +1,40 @@
+---
+- name: Write eos_facts into a csv file
+  hosts: DC1_clab
+  connection: network_cli
+  gather_facts: yes
+  gather_subset: min
+
+  vars:
+    output_path: "./reports/"
+    filename: "device_report_{{ date }}.csv"
+
+  tasks:
+  - name: CSV - Generate output filename
+    set_fact: date="{{lookup('pipe','date +%Y%m%d')}}"
+    run_once: true
+
+  - name: CSV - Create file and set the header
+    lineinfile:
+      dest: "{{ output_path }}/{{ filename }}"
+      line:
+        hostname,model,serialnum,version
+      create: yes
+      state: present
+
+  - name: CSV - Get devices facts
+    set_fact:
+      csv_tmp: >
+        {{ ansible_net_hostname }},{{ ansible_net_model }},{{ ansible_net_serialnum }},{{ ansible_net_version }}
+
+  - name: CSV - Write information into .csv file
+    lineinfile:
+      insertafter: EOF
+      dest: "{{ output_path }}/{{ filename }}"
+      line: "{{ csv_tmp }}"
+
+  - name: CSV - Blank lines removal
+    lineinfile:
+      path: "./{{ output_path }}/{{ filename }}"
+      state: absent
+      regex: '^\s*$'

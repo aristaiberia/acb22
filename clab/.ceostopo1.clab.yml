@@ -1,7 +1,7 @@
 # containerlab parameters
 # name of the containerlab
 name: ceostopo1
-# prefix: __lab-name
+
 mgmt:
   network: custom_mgmt
   ipv4_subnet: 192.168.123.0/24
