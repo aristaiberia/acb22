@@ -2,7 +2,8 @@
 # Ansible connectivity definitions
 ansible_connection: network_cli
 ansible_user: ansible
-ansible_ssh_private_key_file: ~/.ssh/id_rsa
+ansible_password: ansible
+# ansible_ssh_private_key_file: ~/.ssh/id_rsa
 ansible_network_os: eos
 ansible_become: yes
 ansible_become_method: enable
