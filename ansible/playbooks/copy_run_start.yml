@@ -1,5 +1,5 @@
 ---
-- hosts: DC1_clab
+- hosts: CLAB_DC1_FABRIC
   gather_facts: no
   tasks: 
   - name: Save config
