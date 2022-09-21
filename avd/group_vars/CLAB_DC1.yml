@@ -47,6 +47,15 @@ local_users:
     role: network-admin
     no_password: true
 
+# CloudVision - Telemetry Agent (TerminAttr) configuration | Optional
+# You can either provide a list of IPs to target on-premise CloudVision cluster or
+# use DNS name for your CloudVision as a Service instance. If you have both on-prem and
+# CVaaS defined, only on-prem is going to be configured.
+
+cvp_instance_ip: 192.168.88.8
+# cvp_ingestauth_key is required for on-prem CVP
+cvp_ingestauth_key: arista123
+
 # BGP peer groups passwords
 bgp_peer_groups:
   # all passwords set to "arista"
