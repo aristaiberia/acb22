@@ -1,7 +1,7 @@
 # containerlab parameters
 # name of the containerlab
 name: ceostopo1
-
+prefix: __lab-name
 mgmt:
   network: custom_mgmt
   ipv4_subnet: 192.168.123.0/24
@@ -15,42 +15,42 @@ topology:
       image: alpine-host
 
   nodes:
-    spine1:
+    dc1-spine1:
       kind: ceos
       mgmt_ipv4: 192.168.123.11
       binds:
         - templates/spine1:/mnt/flash/ceos-config:ro
         - templates/32C:/mnt/flash/EosIntfMapping.json:ro
       group: spine
-    spine2:
+    dc1-spine2:
       kind: ceos
       mgmt_ipv4: 192.168.123.12
       binds:
         - templates/spine2:/mnt/flash/ceos-config:ro
         - templates/32C:/mnt/flash/EosIntfMapping.json:ro
       group: spine
-    leaf1:
+    dc1-leaf1a:
       kind: ceos
       mgmt_ipv4: 192.168.123.21
       binds:
         - templates/leaf1:/mnt/flash/ceos-config:ro
         - templates/48C8:/mnt/flash/EosIntfMapping.json:ro
       group: leaf
-    leaf2:
+    dc1-leaf1b:
       kind: ceos
       mgmt_ipv4: 192.168.123.22
       binds:
         - templates/leaf2:/mnt/flash/ceos-config:ro
         - templates/48C8:/mnt/flash/EosIntfMapping.json:ro
       group: leaf
-    leaf3:
+    dc1-leaf2a:
       kind: ceos
       mgmt_ipv4: 192.168.123.23
       binds:
         - templates/leaf3:/mnt/flash/ceos-config:ro
         - templates/48C8:/mnt/flash/EosIntfMapping.json:ro
       group: leaf  
-    leaf4:
+    dc1-leaf2b:
       kind: ceos
       mgmt_ipv4: 192.168.123.24
       binds:
@@ -72,21 +72,21 @@ topology:
 
   links:
     # Fabric links
-    - endpoints: [ "leaf1:eth49_1", "spine1:eth1_1" ]
-    - endpoints: [ "leaf1:eth50_1", "spine2:eth1_1" ]
-    - endpoints: [ "leaf2:eth49_1", "spine1:eth2_1" ]
-    - endpoints: [ "leaf2:eth50_1", "spine2:eth2_1" ]
-    - endpoints: [ "leaf3:eth49_1", "spine1:eth3_1" ]
-    - endpoints: [ "leaf3:eth50_1", "spine2:eth3_1" ]
-    - endpoints: [ "leaf4:eth49_1", "spine1:eth4_1" ]
-    - endpoints: [ "leaf4:eth50_1", "spine2:eth4_1" ]
+    - endpoints: [ "dc1-leaf1a:eth49_1", "dc1-spine1:eth1_1" ]
+    - endpoints: [ "dc1-leaf1a:eth50_1", "dc1-spine2:eth1_1" ]
+    - endpoints: [ "dc1-leaf1b:eth49_1", "dc1-spine1:eth2_1" ]
+    - endpoints: [ "dc1-leaf1b:eth50_1", "dc1-spine2:eth2_1" ]
+    - endpoints: [ "dc1-leaf2a:eth49_1", "dc1-spine1:eth3_1" ]
+    - endpoints: [ "dc1-leaf2a:eth50_1", "dc1-spine2:eth3_1" ]
+    - endpoints: [ "dc1-leaf2b:eth49_1", "dc1-spine1:eth4_1" ]
+    - endpoints: [ "dc1-leaf2b:eth50_1", "dc1-spine2:eth4_1" ]
     # MLAG links
-    - endpoints: [ "leaf1:eth53_1", "leaf2:eth53_1" ]
-    - endpoints: [ "leaf1:eth54_1", "leaf2:eth54_1" ]
-    - endpoints: [ "leaf3:eth53_1", "leaf4:eth53_1" ]
-    - endpoints: [ "leaf3:eth54_1", "leaf4:eth54_1" ]
+    - endpoints: [ "dc1-leaf1a:eth53_1", "dc1-leaf1b:eth53_1" ]
+    - endpoints: [ "dc1-leaf1a:eth54_1", "dc1-leaf1b:eth54_1" ]
+    - endpoints: [ "dc1-leaf2a:eth53_1", "dc1-leaf2b:eth53_1" ]
+    - endpoints: [ "dc1-leaf2a:eth54_1", "dc1-leaf2b:eth54_1" ]
     # Server links
-    - endpoints: [ "leaf1:eth1", "host1:eth1" ]
-    - endpoints: [ "leaf2:eth1", "host1:eth2" ]
-    - endpoints: [ "leaf3:eth1", "host2:eth1" ]
-    - endpoints: [ "leaf4:eth1", "host2:eth2" ]
+    - endpoints: [ "dc1-leaf1a:eth1", "host1:eth1" ]
+    - endpoints: [ "dc1-leaf1b:eth1", "host1:eth2" ]
+    - endpoints: [ "dc1-leaf2a:eth1", "host2:eth1" ]
+    - endpoints: [ "dc1-leaf2b:eth1", "host2:eth2" ]

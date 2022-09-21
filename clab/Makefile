@@ -29,6 +29,6 @@ clab_graph: ## Build lab graph
 clab_inspect: ## Build lab graph
 	sudo containerlab inspect --topo $(TOPO_NAME).clab.yml
 
-.PHONY: onboard
+.PHONY: cvp_onboard
 onboard: ## onboard devices to CVP
 	python3 $(CURRENT_DIR)/onboard_devices_to_cvp.py

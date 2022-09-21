@@ -1,6 +1,20 @@
 ---
 all:
   children:
+    CV_SERVERS:
+      hosts:
+        CV_AVD_FABRIC:
+          ansible_host: 192.168.88.8
+          ansible_user: cvpadmin
+          ansible_password: arista123
+          ansible_python_interpreter: $(which python3)
+          ansible_httpapi_host: 192.168.88.8
+          ansible_connection: httpapi
+          ansible_httpapi_use_ssl: true
+          ansible_httpapi_validate_certs: false
+          ansible_network_os: eos
+          ansible_httpapi_port: 443
+
     CLAB_DC1:
       children:
         CLAB_DC1_FABRIC:

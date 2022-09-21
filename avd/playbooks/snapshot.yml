@@ -1,0 +1,8 @@
+---
+- name: Collect EOS commands from devices
+  hosts: CLAB_DC1
+
+  tasks:
+    - name: Collect show commands and generate reports
+      import_role:
+        name: arista.avd.eos_snapshot
