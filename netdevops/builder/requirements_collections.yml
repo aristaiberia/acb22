@@ -1,0 +1,15 @@
+---
+collections:
+  - arista.cvp
+  - amazon.aws
+  - ansible.posix
+  - ansible.windows
+  - awx.awx
+  - azure.azcollection
+  - community.vmware
+  - google.cloud
+  - kubernetes.core
+  - openstack.cloud
+  - ovirt.ovirt
+  - redhatinsights.insights
+  - theforeman.foreman

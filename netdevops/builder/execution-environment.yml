@@ -1,0 +1,5 @@
+---
+version: 1
+dependencies:
+  galaxy: requirements_collections.yml
+  python: requirements_python_packages.txt
