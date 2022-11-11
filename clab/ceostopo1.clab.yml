@@ -1,7 +1,8 @@
 # containerlab parameters
 # name of the containerlab
 name: ceostopo1
-prefix: __lab-name
+# prefix: __lab-name
+prefix: ""
 mgmt:
   network: custom_mgmt
   ipv4_subnet: 192.168.123.0/24
@@ -10,7 +11,7 @@ topology:
   kinds:
     ceos:
       startup-config: templates/ceos-cfg.j2
-      image: ceos-lab:4.28.2F
+      image: ceos:4.28.3M
     linux:
       image: alpine-host
 

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 CMD1='cat /etc/hostname; \
 sudo vconfig add team0 11; \
 sudo ifconfig team0.11 10.10.11.101 netmask 255.255.255.0;\
@@ -18,11 +17,11 @@ sudo ifconfig team0.11; \
 sudo route -n'
 
 
-echo "[INFO] Configuring clab-ceostopo2-host1"
-docker exec -it  ceostopo1-host1 /bin/sh -c "$CMD1"
+echo "[INFO] Configuring host1"
+sudo docker exec -it  host1 /bin/sh -c "$CMD1"
 
-echo "[INFO] Configuring clab-ceostopo2-host2"
-docker exec -it  ceostopo1-host2 /bin/sh -c "$CMD2"
+echo "[INFO] Configuring host2"
+sudo docker exec -it  host2 /bin/sh -c "$CMD2"
 
 
 echo "[INFO] Completed"
