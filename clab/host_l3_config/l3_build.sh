@@ -6,6 +6,7 @@ sudo ifconfig team0.11 10.10.11.101 netmask 255.255.255.0;\
 sudo ip link set up team0.11; \
 sudo ip route add 10.10.11.0/24 via 10.10.11.1 dev team0.11; \
 sudo ifconfig team0.11; \
+sudo teamdctl team0 state
 sudo route -n'
 
 CMD2='cat /etc/hostname; \
@@ -14,6 +15,7 @@ sudo ifconfig team0.11 10.10.11.102 netmask 255.255.255.0;\
 sudo ip link set up team0.11; \
 sudo ip route add 10.10.11.0/24 via 10.10.11.1 dev team0.11; \
 sudo ifconfig team0.11; \
+sudo teamdctl team0 state
 sudo route -n'
 
 
