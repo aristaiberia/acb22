@@ -2,7 +2,7 @@
 - hosts: CLAB_DC1_FABRIC
   gather_facts: no
   tasks: 
-  - name: Save config
+  - name: Restore config
     eos_command:
       commands:
         - config replace flash:acb22-basic-config

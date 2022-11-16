@@ -44,7 +44,7 @@ ip route vrf MGMT 0.0.0.0/0 192.168.123.1
 !
 ip name-server vrf MGMT 8.8.8.8
 ntp local-interface vrf MGMT Management1
-ntp server vrf MGMT time.google.com
+ntp server vrf MGMT time.google.com iburst
 clock timezone Europe/Madrid
 !
 end
