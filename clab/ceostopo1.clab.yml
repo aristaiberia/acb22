@@ -11,9 +11,11 @@ topology:
   kinds:
     ceos:
       startup-config: templates/ceos-cfg.j2
-      image: ceos:4.28.3M
+      image: ceos:latest
+      memory: 2Gb
     linux:
       image: alpine-host
+      memory: 1Gb
 
   nodes:
     dc1-spine1:

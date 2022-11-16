@@ -18,9 +18,24 @@ ansible_httpapi_validate_certs: false
 # Common AVD group variables
 fabric_name: CLAB_DC1
 
+# P2P interfaces MTU, includes VLANs 4093 and 4094 that are over peer-link
+# If you're running vEOS-lab or cEOS, you should use MTU of 1500 instead as shown in the following line
+# p2p_uplinks_mtu: 1500
+p2p_uplinks_mtu: 1500
+
 # Define underlay and overlay routing protocol to be used
 underlay_routing_protocol: EBGP
 overlay_routing_protocol: EBGP
+
+# BGP peer groups passwords
+bgp_peer_groups:
+  # all passwords set to "arista"
+  evpn_overlay_peers:
+    password: Q4fqtbqcZ7oQuKfuWtNGRQ==
+  ipv4_underlay_peers:
+    password: 7x4B4rnJhZB438m9+BrBfQ==
+  mlag_ipv4_underlay_peer:
+    password: 4b21pAdCvWeAqpcKDFMdWw==
 
 # Local users
 local_users:
@@ -52,21 +67,17 @@ local_users:
 # use DNS name for your CloudVision as a Service instance. If you have both on-prem and
 # CVaaS defined, only on-prem is going to be configured.
 
-cvp_instance_ip: 192.168.88.8
-# cvp_ingestauth_key is required for on-prem CVP
-cvp_ingestauth_key: arista123
-
-# BGP peer groups passwords
-bgp_peer_groups:
-  # all passwords set to "arista"
-  evpn_overlay_peers:
-    password: Q4fqtbqcZ7oQuKfuWtNGRQ==
-  ipv4_underlay_peers:
-    password: 7x4B4rnJhZB438m9+BrBfQ==
-  mlag_ipv4_underlay_peer:
-    password: 4b21pAdCvWeAqpcKDFMdWw==
-
-# P2P interfaces MTU, includes VLANs 4093 and 4094 that are over peer-link
-# If you're running vEOS-lab or cEOS, you should use MTU of 1500 instead as shown in the following line
-# p2p_uplinks_mtu: 1500
-p2p_uplinks_mtu: 1500
+daemon_terminattr:
+  # Address of the gRPC server on CloudVision
+  # TCP 9910 is used on on-prem
+  # TCP 443 is used on CV as a Service
+  cvaddrs: # For single cluster
+    - 192.168.88.8:9910
+  # Authentication scheme used to connect to CloudVision
+  cvauth:
+    method: "token"
+    token_file: "/tmp/token"
+  cvvrf: MGMT
+  cvcompression: gzip
+  smashexcludes: "ale,flexCounter,hardware,kni,pulse,strata"
+  ingestexclude: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
