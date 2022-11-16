@@ -14,13 +14,13 @@ avd_build_eapi: ## build configs and configure switches via eAPI
 	ansible-playbook playbooks/fabric-deploy-eapi.yml
 
 .PHONY: avd_build_cvp
-avd_build_cvp: ## build configs and configure switches via eAPI
+avd_build_cvp: ## build configs and configure switches via CVP
 	ansible-playbook playbooks/fabric-deploy-cvp.yml
 
 .PHONY: avd_validate
-avd_validate: ## build configs and configure switches via eAPI
+avd_validate: ## validate states
 	ansible-playbook playbooks/validate-states.yml
 
 .PHONY: avd_snapshot
-avd_snapshot: ## build configs and configure switches via eAPI
+avd_snapshot: ## take snapshot
 	ansible-playbook playbooks/snapshot.yml

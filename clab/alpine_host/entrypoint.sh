@@ -44,7 +44,7 @@ check=$( cat /sys/class/net/eth2/operstate 2>/dev/null )
 
 while [ "up" != "$check" ] ; do
     echo "waiting for interface to come up"
-    check=$( cat /sys/class/net/eth1/operstate 2>/dev/null )
+    check=$( cat /sys/class/net/eth2/operstate 2>/dev/null )
 done
 
 cat /sys/class/net/eth1/operstate

@@ -2,6 +2,12 @@
 # Default gateway used for the management interface
 mgmt_gateway: 192.168.123.1
 
+# Adjust default bfd values, to avoid high CPU.
+bfd_multihop:
+  interval: 1200
+  min_rx: 1200
+  multiplier: 3
+
 # Spine switch group
 spine:
   # Definition of default values that will be configured to all nodes defined in this group
