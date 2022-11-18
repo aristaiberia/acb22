@@ -1,6 +1,9 @@
 #!/bin/bash
 
 CMD1='cat /etc/hostname; \
+sudo ip link set up eth0;
+sudo ip link set up eth1;
+sudo ip link set up eth2;
 sudo vconfig add team0 11; \
 sudo ifconfig team0.11 10.10.11.101 netmask 255.255.255.0;\
 sudo ip link set up team0.11; \
@@ -10,6 +13,9 @@ sudo teamdctl team0 state
 sudo route -n'
 
 CMD2='cat /etc/hostname; \
+sudo ip link set up eth0;
+sudo ip link set up eth1;
+sudo ip link set up eth2;
 sudo vconfig add team0 11; \
 sudo ifconfig team0.11 10.10.11.102 netmask 255.255.255.0;\
 sudo ip link set up team0.11; \
