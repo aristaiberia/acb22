@@ -48,7 +48,7 @@ while [ "up" != "$check" ] ; do
 done
 
 cat /sys/class/net/eth1/operstate
-cat /sys/class/net/eth1/operstate
+cat /sys/class/net/eth2/operstate
 
 ###############
 # Enabling LLDP
@@ -128,4 +128,5 @@ fi
 # Enter sleeping loop
 #####################
 
-while sleep 3600; do :; done
+# while sleep 3600; do :; done
+while true; do sleep 3600; done
