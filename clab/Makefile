@@ -8,6 +8,7 @@ help: ## Display help message
 .PHONY: clab_deploy
 clab_deploy: ## Deploy ceos lab
 	sudo containerlab deploy --topo $(TOPO_NAME).clab.yml
+	$(CURRENT_DIR)/./host_l3_config/l3_build.sh
 
 .PHONY: clab_save
 clab_save: ## Save ceos lab config
@@ -32,3 +33,9 @@ clab_inspect: ## Build lab graph
 .PHONY: cvp_onboard
 onboard: ## onboard devices to CVP
 	python3 $(CURRENT_DIR)/onboard_devices_to_cvp.py
+
+.PHONY: host l3 config
+clab_host_l3: ## onboard devices to CVP
+	$(CURRENT_DIR)/./host_l3_config/l3_build.sh
+
+
