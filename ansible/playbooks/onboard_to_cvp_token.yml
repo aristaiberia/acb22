@@ -1,0 +1,18 @@
+---
+- hosts: CLAB_DC1_FABRIC
+  connection: network_cli
+  gather_facts: no
+  tasks:
+    - name: Gather eos facts 
+      eos_facts:
+    - name: Copy cvp token to devices 
+      command: scp -o "StrictHostKeyChecking=no" "{{playbook_dir}}"/cvp-token  ja@{{inventory_hostname}}:/tmp/token
+    - name: Configure TerminAttr daemon
+      eos_command:
+        commands:
+          - "enable"
+          - "config"
+          - "daemon TerminAttr"
+          - "exec /usr/bin/TerminAttr -cvaddr=192.168.88.8:9910 -cvauth=token,/tmp/token -cvvrf=MGMT -cvgnmi -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -taillogs"
+          - "shut"
+          - "no shut"
