@@ -7,7 +7,7 @@ help: ## Display help message
 
 .PHONY: avd_build_config
 avd_build_config: ## build configs only
-	ansible-playbook playbooks/build-configs.yml
+	ansible-playbook playbooks/build-configs.yml --tag build
 
 .PHONY: avd_build_eapi
 avd_build_eapi: ## build configs and configure switches via eAPI

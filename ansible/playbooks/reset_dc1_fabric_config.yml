@@ -1,6 +1,6 @@
 ---
 - hosts: CLAB_DC1_FABRIC
-  gather_facts: no
+  gather_facts: false
   tasks: 
   - name: Restore config and save
     eos_command:

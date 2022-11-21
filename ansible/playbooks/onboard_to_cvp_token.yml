@@ -1,12 +1,12 @@
 ---
 - hosts: CLAB_DC1_FABRIC
   connection: network_cli
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: Gather eos facts 
       eos_facts:
     - name: Copy cvp token to devices 
-      command: scp -o "StrictHostKeyChecking=no" "{{playbook_dir}}"/cvp-token  ja@{{inventory_hostname}}:/tmp/token
+      command: scp -o "StrictHostKeyChecking=no" "{{playbook_dir}}"/cvp-token  ansible@{{inventory_hostname}}:/tmp/token
     - name: Configure TerminAttr daemon
       eos_command:
         commands:
