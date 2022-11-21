@@ -1,0 +1,12 @@
+---
+- hosts: CLAB_DC1_FABRIC
+  gather_facts: no
+  tasks: 
+  - name: Send command 
+    eos_command:
+      commands:
+        - "enable"
+        - "config"
+        - "interface eth1"
+        - "no shut"
+

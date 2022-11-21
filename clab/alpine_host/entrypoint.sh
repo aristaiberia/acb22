@@ -54,14 +54,14 @@ cat /sys/class/net/eth2/operstate
 # Enabling LLDP
 ###############
 
-lldpad -d
-for i in `ls /sys/class/net/ | grep 'eth\|ens\|eno'`
-do
-    lldptool set-lldp -i $i adminStatus=rxtx
-    lldptool -T -i $i -V sysName enableTx=yes
-    lldptool -T -i $i -V portDesc enableTx=yes
-    lldptool -T -i $i -V sysDesc enableTx=yes
-done
+#lldpad -d
+# for i in `ls /sys/class/net/ | grep 'eth\|ens\|eno'`
+# do
+#     lldptool set-lldp -i $i adminStatus=rxtx
+#     lldptool -T -i $i -V sysName enableTx=yes
+#     lldptool -T -i $i -V portDesc enableTx=yes
+#     lldptool -T -i $i -V sysDesc enableTx=yes
+# done
 
 ################
 # Teaming setup

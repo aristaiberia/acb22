@@ -81,3 +81,9 @@ daemon_terminattr:
   cvcompression: gzip
   smashexcludes: "ale,flexCounter,hardware,kni,pulse,strata"
   ingestexclude: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
+
+# EOS CLI rendered directly on the device
+eos_cli: |
+  interface  Management1
+    no lldp transmit
+    no lldp receive
