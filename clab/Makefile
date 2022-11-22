@@ -31,11 +31,11 @@ clab_inspect: ## Build lab graph
 	sudo containerlab inspect --topo $(TOPO_NAME).clab.yml
 
 .PHONY: cvp_onboard
-onboard: ## onboard devices to CVP
+cvp_onboard: ## onboard devices to CVP
 	python3 $(CURRENT_DIR)/onboard_devices_to_cvp.py
 
 .PHONY: host l3 config
-clab_host_l3: ## onboard devices to CVP
+clab_host_l3: ## Configure lab hosts ip addresses
 	$(CURRENT_DIR)/./host_l3_config/l3_build.sh
 
 
